@@ -23,6 +23,7 @@ API_KEY = str(os.getenv('API_KEY'))
 bot = telebot.TeleBot(API_KEY)
 
 
+# Message handler for command /start
 @bot.message_handler(commands=['start'])
 def start_bot(message):
     user_id = message.from_user.id
@@ -31,6 +32,7 @@ def start_bot(message):
     bot.register_next_step_handler(message, currency_type)
 
 
+# Function to transmit necessary variables to generate an images
 def currency_type(message):
     user_id = message.from_user.id
     if message.text == '💸 USD rate':
@@ -95,6 +97,7 @@ def currency_type(message):
         bot.register_next_step_handler(message, currency_type)
 
 
+# Function to generate an image
 def rate_show(message, dollar_in_the_office, image_name, header, generated_image, from_top_get):
     user_id = message.from_user.id
     url = 'https://pultop.uz/kurs-obmena-valyut/'
